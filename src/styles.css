@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid rgba(0,0,0,0.24);
+}
+
+th, td {
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.08);
+}
+
+th {
+    background-color: #ff6060;
+}
