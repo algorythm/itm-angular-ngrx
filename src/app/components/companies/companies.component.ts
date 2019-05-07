@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/models/Company';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-companies',
@@ -7,20 +8,14 @@ import { Company } from 'src/models/Company';
   styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-  companies: Company[] = [
-    {
-      id: '123',
-      name: 'Microsoft'
-    },
-    {
-      id: 'ewq',
-      name: 'Google'
-    }
-  ];
+  companies: Company[] = [];
 
-  constructor() { }
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
+    this.companyService.getTodos().subscribe(c => {
+      console.log('Fetched all companies', c);
+      this.companies = c;
+    });
   }
-
 }
