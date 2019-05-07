@@ -17,7 +17,7 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  getTodos(): Observable<Company[]> {
+  getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(`${this.baseUrl}/companies.json`);
   }
 }

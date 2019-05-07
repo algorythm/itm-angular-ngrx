@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/models/Company';
 import { CompanyService } from '../../services/company.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-companies',
@@ -8,14 +9,15 @@ import { CompanyService } from '../../services/company.service';
   styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-  companies: Company[] = [];
+  companies$: Observable<any>;
 
   constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
-    this.companyService.getTodos().subscribe(c => {
-      console.log('Fetched all companies', c);
-      this.companies = c;
-    });
+    this.getCompanies();
+  }
+
+  getCompanies() {
+    this.companies$ = this.companyService.getCompanies();
   }
 }
