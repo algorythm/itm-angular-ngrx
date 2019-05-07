@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/models/Company';
-import { CompanyService } from '../../services/company.service';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { CompanyState, getCompanies } from 'src/reducers/company.reducer';
+import * as companyActions from '../../../actions/company.actions';
 
 @Component({
   selector: 'app-companies',
@@ -9,15 +11,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-  companies$: Observable<any>;
+  companies$: Observable<Company[]>;
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private store: Store<CompanyState>) {
+    this.companies$ = this.store.select(getCompanies);
+  }
 
   ngOnInit() {
     this.getCompanies();
   }
 
   getCompanies() {
-    this.companies$ = this.companyService.getCompanies();
+    this.store.dispatch(new companyActions.LoadCompanies());
   }
 }
